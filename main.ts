@@ -1,5 +1,16 @@
 function DrumLevel1 () {
-    music.play(music.createSong(assets.song`Drum Level 1`), music.PlaybackMode.UntilDone)
+    music.play(music.createSong(assets.song`Drum Level 1`), music.PlaybackMode.InBackground)
+    QuarterNote()
+    QuarterNote()
+    QuarterNote()
+    QuarterNote()
+    QuarterNote()
+}
+function QuarterNote () {
+    Quarter = sprites.create(assets.image`QuarterPic`, SpriteKind.Projectile)
+    Quarter.setPosition(161, 108)
+    Quarter.setVelocity(-50, 0)
+    pause(500)
 }
 function Load_Intro_Sequence () {
     scene.setBackgroundImage(assets.image`School Front`)
@@ -153,12 +164,17 @@ function Load_School_View () {
     controller.moveSprite(mySprite)
     scene.cameraFollowSprite(mySprite)
     tiles.placeOnTile(mySprite, tiles.getTileLocation(11, 23))
+    DrumClass()
 }
 function DrumClass () {
+    tiles.setCurrentTilemap(tilemap`level3`)
     scene.setBackgroundImage(assets.image`Bass Room`)
+    scene.centerCameraAt(0, 0)
+    mySprite.setPosition(21, 108)
+    controller.moveSprite(mySprite, 0, 0)
     DrumLevel1()
 }
 let mySprite: Sprite = null
+let Quarter: Sprite = null
 Load_Intro_Sequence()
-DrumClass()
 Load_School_View()
