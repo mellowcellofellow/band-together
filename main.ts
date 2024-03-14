@@ -164,17 +164,40 @@ function Load_School_View () {
     controller.moveSprite(mySprite)
     scene.cameraFollowSprite(mySprite)
     tiles.placeOnTile(mySprite, tiles.getTileLocation(11, 23))
-    DrumClass()
 }
 function DrumClass () {
     tiles.setCurrentTilemap(tilemap`level3`)
     scene.setBackgroundImage(assets.image`Bass Room`)
     scene.centerCameraAt(0, 0)
+    mySprite = sprites.create(img`
+        . . . . f f f f . . . . . 
+        . . f f f f f f f f . . . 
+        . f f f f f f c f f f . . 
+        f f f f f f c c f f f c . 
+        f f f c f f f f f f f c . 
+        c c c f f f e e f f c c . 
+        f f f f f e e f f c c f . 
+        f f f b f e e f b f f f . 
+        . f 4 1 f 4 4 f 1 4 f . . 
+        . f e 4 4 4 4 4 4 e f . . 
+        . f f f e e e e f f f . . 
+        f e f b 7 7 7 7 b f e f . 
+        e 4 f 7 7 7 7 7 7 f 4 e . 
+        e e f 6 6 6 6 6 6 f e e . 
+        . . . f f f f f f . . . . 
+        . . . f f . . f f . . . . 
+        `, SpriteKind.Player)
     mySprite.setPosition(21, 108)
     controller.moveSprite(mySprite, 0, 0)
+    game.splash("Get Ready!")
     DrumLevel1()
 }
 let mySprite: Sprite = null
 let Quarter: Sprite = null
 Load_Intro_Sequence()
 Load_School_View()
+forever(function () {
+    if (mySprite.tileKindAt(TileDirection.Top, assets.tile`myTile0`)) {
+        DrumClass()
+    }
+})
