@@ -268,6 +268,44 @@ bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 . f f f f f f f . . 
 . . f f f f f . . . 
 `;
+            case "image4":
+            case "First EighthPic":return img`
+. . . . . . . f f f f f f f f f 
+. . . . . . . f f f f f f f f f 
+. . . . . . . f f f f f f f f f 
+. . . . . . . f f f f f f f f f 
+. . . . . . . f . . . . . . . . 
+. . . . . . . f . . . . . . . . 
+. . . . . . . f . . . . . . . . 
+. . . . . . . f . . . . . . . . 
+. . . . . . . f . . . . . . . . 
+. . f f f f f f . . . . . . . . 
+. f f f f f f f . . . . . . . . 
+. f f f f f f f . . . . . . . . 
+. f f f f f f f . . . . . . . . 
+. f f f f f f f . . . . . . . . 
+. f f f f f f f . . . . . . . . 
+. . f f f f f . . . . . . . . . 
+`;
+            case "image5":
+            case "SecondEighthPic":return img`
+f f f f f f f f . . 
+f f f f f f f f . . 
+f f f f f f f f . . 
+f f f f f f f f . . 
+. . . . . . . f . . 
+. . . . . . . f . . 
+. . . . . . . f . . 
+. . . . . . . f . . 
+. . . . . . . f . . 
+. . f f f f f f . . 
+. f f f f f f f . . 
+. f f f f f f f . . 
+. f f f f f f f . . 
+. f f f f f f f . . 
+. f f f f f f f . . 
+. . f f f f f . . . 
+`;
         }
         return null;
     })

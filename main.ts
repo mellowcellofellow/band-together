@@ -1,8 +1,13 @@
 function DrumLevel1 () {
     music.play(music.createSong(assets.song`Drum Level 1`), music.PlaybackMode.InBackground)
+    pause(1500)
+    PairofEighths()
     QuarterNote()
+    PairofEighths()
     QuarterNote()
+    PairofEighths()
     QuarterNote()
+    PairofEighths()
     QuarterNote()
     QuarterNote()
 }
@@ -11,6 +16,7 @@ function QuarterNote () {
     Quarter.setPosition(161, 108)
     Quarter.setVelocity(-50, 0)
     pause(500)
+    Quarter.setFlag(SpriteFlag.DestroyOnWall, true)
 }
 function Load_Intro_Sequence () {
     scene.setBackgroundImage(assets.image`School Front`)
@@ -19,6 +25,12 @@ function Load_Intro_Sequence () {
     game.showLongText("\"Battle this Friday, all bands should have a singer, guitar, bass and drums.\"", DialogLayout.Bottom)
     game.showLongText("That sounds like a way to meet people. I wonder where I'm going to find people to join my band?", DialogLayout.Bottom)
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
+    if (controller.A.isPressed()) {
+        info.changeScoreBy(100)
+        sprites.destroy(otherSprite)
+    }
+})
 function Load_School_View () {
     scene.setBackgroundImage(img`
         ................................................................................................................................................................
@@ -165,6 +177,18 @@ function Load_School_View () {
     scene.cameraFollowSprite(mySprite)
     tiles.placeOnTile(mySprite, tiles.getTileLocation(11, 23))
 }
+function PairofEighths () {
+    firsteighth = sprites.create(assets.image`First EighthPic`, SpriteKind.Projectile)
+    firsteighth.setPosition(161, 108)
+    firsteighth.setVelocity(-50, 0)
+    pause(250)
+    firsteighth.setFlag(SpriteFlag.DestroyOnWall, true)
+    second_eighth = sprites.create(assets.image`SecondEighthPic`, SpriteKind.Projectile)
+    second_eighth.setPosition(161, 108)
+    second_eighth.setVelocity(-50, 0)
+    pause(250)
+    second_eighth.setFlag(SpriteFlag.DestroyOnWall, true)
+}
 function DrumClass () {
     tiles.setCurrentTilemap(tilemap`level3`)
     scene.setBackgroundImage(assets.image`Bass Room`)
@@ -192,6 +216,8 @@ function DrumClass () {
     game.splash("Get Ready!")
     DrumLevel1()
 }
+let second_eighth: Sprite = null
+let firsteighth: Sprite = null
 let mySprite: Sprite = null
 let Quarter: Sprite = null
 Load_Intro_Sequence()
