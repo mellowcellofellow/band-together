@@ -1,6 +1,15 @@
+namespace SpriteKind {
+    export const Press = SpriteKind.create()
+}
+sprites.onOverlap(SpriteKind.Press, SpriteKind.Projectile, function (sprite, otherSprite) {
+    if (controller.A.isPressed()) {
+        info.changeScoreBy(100)
+        sprites.destroy(otherSprite)
+    }
+})
 function DrumLevel1 () {
     music.play(music.createSong(assets.song`Drum Level 1`), music.PlaybackMode.InBackground)
-    pause(1500)
+    pause(1550)
     PairofEighths()
     QuarterNote()
     PairofEighths()
@@ -9,13 +18,45 @@ function DrumLevel1 () {
     QuarterNote()
     PairofEighths()
     QuarterNote()
+    for (let index = 0; index < 6; index++) {
+        QuarterNote()
+        QuarterNote()
+        QuarterNote()
+        QuarterNote()
+        QuarterNote()
+        QuarterNote()
+        QuarterNote()
+        PairofEighths()
+    }
+    for (let index = 0; index < 2; index++) {
+        PairofEighths()
+        QuarterNote()
+        QuarterNote()
+        QuarterNote()
+        QuarterNote()
+        QuarterNote()
+        QuarterNote()
+        PairofEighths()
+    }
+    for (let index = 0; index < 2; index++) {
+        PairofEighths()
+        PairofEighths()
+        QuarterNote()
+        QuarterNote()
+    }
+    for (let index = 0; index < 2; index++) {
+        PairofEighths()
+        PairofEighths()
+        PairofEighths()
+        PairofEighths()
+    }
     QuarterNote()
 }
 function QuarterNote () {
-    Quarter = sprites.create(assets.image`QuarterPic`, SpriteKind.Projectile)
+    Quarter = sprites.create(assets.image`WholePic`, SpriteKind.Projectile)
     Quarter.setPosition(161, 108)
     Quarter.setVelocity(-50, 0)
-    pause(500)
+    pause(520)
     Quarter.setFlag(SpriteFlag.DestroyOnWall, true)
 }
 function Load_Intro_Sequence () {
@@ -25,12 +66,37 @@ function Load_Intro_Sequence () {
     game.showLongText("\"Battle this Friday, all bands should have a singer, guitar, bass and drums.\"", DialogLayout.Bottom)
     game.showLongText("That sounds like a way to meet people. I wonder where I'm going to find people to join my band?", DialogLayout.Bottom)
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
-    if (controller.A.isPressed()) {
-        info.changeScoreBy(100)
-        sprites.destroy(otherSprite)
-    }
-})
+function BassClass () {
+    tiles.setCurrentTilemap(tilemap`level3`)
+    scene.setBackgroundImage(assets.image`Bass Room`)
+    scene.centerCameraAt(0, 0)
+    mySprite2 = sprites.create(img`
+        f 
+        `, SpriteKind.Press)
+    mySprite = sprites.create(img`
+        . . . . f f f f . . . . . 
+        . . f f f f f f f f . . . 
+        . f f f f f f c f f f . . 
+        f f f f f f c c f f f c . 
+        f f f c f f f f f f f c . 
+        c c c f f f e e f f c c . 
+        f f f f f e e f f c c f . 
+        f f f b f e e f b f f f . 
+        . f 4 1 f 4 4 f 1 4 f . . 
+        . f e 4 4 4 4 4 4 e f . . 
+        . f f f e e e e f f f . . 
+        f e f b 7 7 7 7 b f e f . 
+        e 4 f 7 7 7 7 7 7 f 4 e . 
+        e e f 6 6 6 6 6 6 f e e . 
+        . . . f f f f f f . . . . 
+        . . . f f . . f f . . . . 
+        `, SpriteKind.Player)
+    mySprite.setPosition(21, 108)
+    mySprite2.setPosition(21, 112)
+    controller.moveSprite(mySprite, 0, 0)
+    game.splash("Get Ready!")
+    DrumLevel1()
+}
 function Load_School_View () {
     scene.setBackgroundImage(img`
         ................................................................................................................................................................
@@ -181,18 +247,21 @@ function PairofEighths () {
     firsteighth = sprites.create(assets.image`First EighthPic`, SpriteKind.Projectile)
     firsteighth.setPosition(161, 108)
     firsteighth.setVelocity(-50, 0)
-    pause(250)
+    pause(260)
     firsteighth.setFlag(SpriteFlag.DestroyOnWall, true)
     second_eighth = sprites.create(assets.image`SecondEighthPic`, SpriteKind.Projectile)
     second_eighth.setPosition(161, 108)
     second_eighth.setVelocity(-50, 0)
-    pause(250)
+    pause(280)
     second_eighth.setFlag(SpriteFlag.DestroyOnWall, true)
 }
 function DrumClass () {
     tiles.setCurrentTilemap(tilemap`level3`)
     scene.setBackgroundImage(assets.image`Bass Room`)
     scene.centerCameraAt(0, 0)
+    mySprite2 = sprites.create(img`
+        f 
+        `, SpriteKind.Press)
     mySprite = sprites.create(img`
         . . . . f f f f . . . . . 
         . . f f f f f f f f . . . 
@@ -212,18 +281,31 @@ function DrumClass () {
         . . . f f . . f f . . . . 
         `, SpriteKind.Player)
     mySprite.setPosition(21, 108)
+    mySprite2.setPosition(21, 112)
     controller.moveSprite(mySprite, 0, 0)
     game.splash("Get Ready!")
     DrumLevel1()
 }
+function WholeNote () {
+    Whole = sprites.create(assets.image`WholePic`, SpriteKind.Projectile)
+    Whole.setPosition(161, 108)
+    Whole.setVelocity(-50, 0)
+    pause(520)
+    Whole.setFlag(SpriteFlag.DestroyOnWall, true)
+}
+let Whole: Sprite = null
 let second_eighth: Sprite = null
 let firsteighth: Sprite = null
 let mySprite: Sprite = null
+let mySprite2: Sprite = null
 let Quarter: Sprite = null
 Load_Intro_Sequence()
 Load_School_View()
 forever(function () {
     if (mySprite.tileKindAt(TileDirection.Top, assets.tile`myTile0`)) {
         DrumClass()
+    }
+    if (mySprite.tileKindAt(TileDirection.Top, assets.tile`myTile1`)) {
+    	
     }
 })
