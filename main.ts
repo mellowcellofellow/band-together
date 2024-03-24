@@ -3,11 +3,17 @@ namespace SpriteKind {
 }
 sprites.onOverlap(SpriteKind.Press, SpriteKind.Projectile, function (sprite, otherSprite) {
     if (controller.A.isPressed()) {
-        info.changeScoreBy(100)
+        info.changeScoreBy(200)
         sprites.destroy(otherSprite)
     }
 })
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (GameState == 1) {
+        info.changeScoreBy(-100)
+    }
+})
 function DrumLevel1 () {
+    GameState = 1
     music.play(music.createSong(assets.song`Drum Level 1`), music.PlaybackMode.InBackground)
     pause(1550)
     PairofEighths()
@@ -51,6 +57,7 @@ function DrumLevel1 () {
         PairofEighths()
     }
     QuarterNote()
+    GameState = 0
 }
 function QuarterNote () {
     Quarter = sprites.create(assets.image`QuarterPic`, SpriteKind.Projectile)
@@ -243,6 +250,7 @@ let firsteighth: Sprite = null
 let mySprite: Sprite = null
 let mySprite2: Sprite = null
 let Quarter: Sprite = null
+let GameState = 0
 Load_Intro_Sequence()
 Load_School_View()
 forever(function () {
@@ -250,6 +258,6 @@ forever(function () {
         DrumClass()
     }
     if (mySprite.tileKindAt(TileDirection.Top, assets.tile`myTile1`)) {
-    	
+        BassClass()
     }
 })
