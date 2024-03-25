@@ -12,6 +12,20 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         info.changeScoreBy(-100)
     }
 })
+function BassLevel1 () {
+    Half = 1
+    music.play(music.createSong(assets.song`BassPart1`), music.PlaybackMode.InBackground)
+    WholeNote()
+    HalfNote()
+    HalfNote()
+}
+function HalfNote () {
+    mySprite3 = sprites.create(assets.image`HalfNotePic`, SpriteKind.Projectile)
+    mySprite3.setPosition(161, 108)
+    mySprite3.setVelocity(-50, 0)
+    pause(1000)
+    mySprite3.setFlag(SpriteFlag.DestroyOnWall, true)
+}
 function DrumLevel1 () {
     GameState = 1
     music.play(music.createSong(assets.song`Drum Level 1`), music.PlaybackMode.InBackground)
@@ -81,6 +95,7 @@ function BassClass () {
     mySprite2.setPosition(21, 112)
     controller.moveSprite(mySprite, 0, 0)
     game.splash("Get Ready!")
+    BassLevel1()
 }
 function Load_School_View () {
     scene.setBackgroundImage(img`
@@ -239,7 +254,7 @@ function WholeNote () {
     Whole = sprites.create(assets.image`WholePic`, SpriteKind.Projectile)
     Whole.setPosition(161, 108)
     Whole.setVelocity(-50, 0)
-    pause(520)
+    pause(2000)
     Whole.setFlag(SpriteFlag.DestroyOnWall, true)
 }
 let Whole: Sprite = null
@@ -248,6 +263,8 @@ let firsteighth: Sprite = null
 let mySprite: Sprite = null
 let mySprite2: Sprite = null
 let Quarter: Sprite = null
+let mySprite3: Sprite = null
+let Half = 0
 let GameState = 0
 Load_Intro_Sequence()
 Load_School_View()
