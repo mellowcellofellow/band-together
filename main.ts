@@ -304,5 +304,6 @@ forever(function () {
         game.showLongText("Hey, there's a battle of the bands on Friday!", DialogLayout.Bottom)
         game.showLongText("If I win that then everybody will think I'm cool.", DialogLayout.Bottom)
         game.showLongText("But I need a band... I better find some other musicians.", DialogLayout.Bottom)
+        tiles.placeOnTile(mySprite, tiles.getTileLocation(17, 12))
     }
 })
