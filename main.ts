@@ -221,10 +221,19 @@ function Load_School_View () {
         ................................................................................................................................................................
         `)
     tiles.setCurrentTilemap(tilemap`School View Tilemap`)
+    student1 = sprites.create(assets.image`princess2Right1`, SpriteKind.Enemy)
+    student2 = sprites.create(assets.image`princessFront0`, SpriteKind.Enemy)
+    student3 = sprites.create(assets.image`villager1WalkLeft1`, SpriteKind.Enemy)
     mySprite = sprites.create(assets.image`Player`, SpriteKind.Player)
+    poster = sprites.create(assets.image`smallBlue0`, SpriteKind.Player)
     controller.moveSprite(mySprite)
     scene.cameraFollowSprite(mySprite)
     tiles.placeOnTile(mySprite, tiles.getTileLocation(11, 23))
+    tiles.placeOnTile(student1, tiles.getTileLocation(9, 16))
+    tiles.placeOnTile(student2, tiles.getTileLocation(10, 15))
+    tiles.placeOnTile(student3, tiles.getTileLocation(11, 16))
+    tiles.placeOnTile(poster, tiles.getTileLocation(17, 10))
+    game.showLongText("Use up/down/left/right to explore your new school.", DialogLayout.Full)
 }
 function PairofEighths () {
     firsteighth = sprites.create(assets.image`First EighthPic`, SpriteKind.Projectile)
@@ -260,6 +269,10 @@ function WholeNote () {
 let Whole: Sprite = null
 let second_eighth: Sprite = null
 let firsteighth: Sprite = null
+let poster: Sprite = null
+let student3: Sprite = null
+let student2: Sprite = null
+let student1: Sprite = null
 let mySprite: Sprite = null
 let mySprite2: Sprite = null
 let Quarter: Sprite = null
@@ -274,5 +287,22 @@ forever(function () {
     }
     if (mySprite.tileKindAt(TileDirection.Top, assets.tile`myTile1`)) {
         BassClass()
+    }
+    if (mySprite.tileKindAt(TileDirection.Top, assets.tile`myTile2`)) {
+        game.showLongText("I bet he doesn't even play in a band.", DialogLayout.Bottom)
+        tiles.placeOnTile(mySprite, tiles.getTileLocation(9, 18))
+    }
+    if (mySprite.tileKindAt(TileDirection.Top, assets.tile`myTile3`)) {
+        game.showLongText("What a dork.", DialogLayout.Bottom)
+        tiles.placeOnTile(mySprite, tiles.getTileLocation(10, 18))
+    }
+    if (mySprite.tileKindAt(TileDirection.Top, assets.tile`myTile4`)) {
+        game.showLongText("Oh look, it's the new kid.", DialogLayout.Bottom)
+        tiles.placeOnTile(mySprite, tiles.getTileLocation(11, 18))
+    }
+    if (mySprite.tileKindAt(TileDirection.Top, assets.tile`myTile6`)) {
+        game.showLongText("Hey, there's a battle of the bands on Friday!", DialogLayout.Bottom)
+        game.showLongText("If I win that then everybody will think I'm cool.", DialogLayout.Bottom)
+        game.showLongText("But I need a band... I better find some other musicians.", DialogLayout.Bottom)
     }
 })
