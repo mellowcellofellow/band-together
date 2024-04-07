@@ -1,5 +1,6 @@
 namespace SpriteKind {
     export const Press = SpriteKind.create()
+    export const Band = SpriteKind.create()
 }
 sprites.onOverlap(SpriteKind.Press, SpriteKind.Projectile, function (sprite, otherSprite) {
     if (controller.A.isPressed()) {
@@ -72,6 +73,11 @@ function DrumLevel1 () {
     }
     QuarterNote()
     GameState = 0
+    if (info.score() > 10000) {
+        game.splash("That was pretty good! I'll join your band!")
+    } else {
+        game.splash("You'll have to do better than that to get me in your band!")
+    }
 }
 function QuarterNote () {
     Quarter = sprites.create(assets.image`QuarterPic`, SpriteKind.Projectile)
@@ -96,6 +102,12 @@ function BassClass () {
     controller.moveSprite(mySprite, 0, 0)
     game.splash("Get Ready!")
     BassLevel1()
+}
+function Drum_Room_Conversation () {
+    game.splash("Hey! Are you a drummer?")
+    game.splash("I've been known to drum.")
+    game.splash("I'm looking for a drummer to join my Band!")
+    game.splash("Well, I don't just join any band. You'll have to prove yourself first.")
 }
 function Load_School_View () {
     scene.setBackgroundImage(img`
@@ -249,15 +261,23 @@ function PairofEighths () {
 }
 function DrumClass () {
     tiles.setCurrentTilemap(tilemap`level3`)
-    scene.setBackgroundImage(assets.image`Bass Room`)
+    scene.setBackgroundImage(assets.image`Drum Room`)
     scene.centerCameraAt(0, 0)
     mySprite2 = sprites.create(assets.image`Point`, SpriteKind.Press)
+    mySprite4 = sprites.create(assets.image`Drummer`, SpriteKind.Band)
     mySprite = sprites.create(assets.image`Player`, SpriteKind.Player)
-    mySprite.setPosition(21, 108)
+    mySprite.setPosition(9, 108)
     mySprite2.setPosition(21, 112)
+    mySprite4.setPosition(29, 84)
     controller.moveSprite(mySprite, 0, 0)
-    game.splash("Get Ready!")
-    DrumLevel1()
+    Drum_Room_Conversation()
+    if (game.ask("Are you ready to prove yourself?")) {
+        game.splash("Get Ready!")
+        DrumLevel1()
+    } else {
+        sprites.destroyAllSpritesOfKind(SpriteKind.Player)
+        Load_School_View()
+    }
 }
 function WholeNote () {
     Whole = sprites.create(assets.image`WholePic`, SpriteKind.Projectile)
@@ -267,6 +287,7 @@ function WholeNote () {
     Whole.setFlag(SpriteFlag.DestroyOnWall, true)
 }
 let Whole: Sprite = null
+let mySprite4: Sprite = null
 let second_eighth: Sprite = null
 let firsteighth: Sprite = null
 let poster: Sprite = null
