@@ -1,6 +1,7 @@
 namespace SpriteKind {
     export const Press = SpriteKind.create()
     export const Band = SpriteKind.create()
+    export const tail = SpriteKind.create()
 }
 sprites.onOverlap(SpriteKind.Press, SpriteKind.Projectile, function (sprite, otherSprite) {
     if (controller.A.isPressed()) {
@@ -14,17 +15,33 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 function BassLevel1 () {
-    Half = 1
+    GameState = 1
     music.play(music.createSong(assets.song`BassPart1`), music.PlaybackMode.InBackground)
+    pause(1550)
     WholeNote()
     HalfNote()
     HalfNote()
+    QuarterNote()
+    QuarterNote()
+    QuarterNote()
+    QuarterNote()
+    WholeNote()
+    HalfNote()
+    QuarterNote()
+    QuarterNote()
+    WholeNote()
+    HalfNote()
+    HalfNote()
+    for (let index = 0; index < 12; index++) {
+        QuarterNote()
+    }
+    WholeNote()
 }
 function HalfNote () {
     mySprite3 = sprites.create(assets.image`HalfNotePic`, SpriteKind.Projectile)
     mySprite3.setPosition(161, 108)
     mySprite3.setVelocity(-50, 0)
-    pause(1000)
+    pause(1040)
     mySprite3.setFlag(SpriteFlag.DestroyOnWall, true)
 }
 function DrumLevel1 () {
@@ -72,12 +89,17 @@ function DrumLevel1 () {
         PairofEighths()
     }
     QuarterNote()
+    pause(5000)
     GameState = 0
-    if (info.score() > 10000) {
+    if (info.score() > 9000) {
+        music.play(music.stringPlayable("C E G C5 - B C5 - ", 120), music.PlaybackMode.InBackground)
         game.splash("That was pretty good! I'll join your band!")
     } else {
         game.splash("You'll have to do better than that to get me in your band!")
     }
+    sprites.destroyAllSpritesOfKind(SpriteKind.Player)
+    Load_School_View()
+    info.setScore(0)
 }
 function QuarterNote () {
     Quarter = sprites.create(assets.image`QuarterPic`, SpriteKind.Projectile)
@@ -97,16 +119,20 @@ function BassClass () {
     scene.centerCameraAt(0, 0)
     mySprite2 = sprites.create(assets.image`Point`, SpriteKind.Press)
     mySprite = sprites.create(assets.image`Player`, SpriteKind.Player)
-    mySprite.setPosition(21, 108)
+    mySprite.setPosition(9, 108)
     mySprite2.setPosition(21, 112)
     controller.moveSprite(mySprite, 0, 0)
     game.splash("Get Ready!")
     BassLevel1()
 }
 function Drum_Room_Conversation () {
+    game.setDialogTextColor(15)
     game.splash("Hey! Are you a drummer?")
+    game.setDialogTextColor(7)
     game.splash("I've been known to drum.")
+    game.setDialogTextColor(15)
     game.splash("I'm looking for a drummer to join my Band!")
+    game.setDialogTextColor(7)
     game.splash("Well, I don't just join any band. You'll have to prove yourself first.")
 }
 function Load_School_View () {
@@ -271,6 +297,7 @@ function DrumClass () {
     mySprite4.setPosition(29, 84)
     controller.moveSprite(mySprite, 0, 0)
     Drum_Room_Conversation()
+    game.setDialogTextColor(7)
     if (game.ask("Are you ready to prove yourself?")) {
         game.splash("Get Ready!")
         DrumLevel1()
@@ -283,7 +310,7 @@ function WholeNote () {
     Whole = sprites.create(assets.image`WholePic`, SpriteKind.Projectile)
     Whole.setPosition(161, 108)
     Whole.setVelocity(-50, 0)
-    pause(2000)
+    pause(2080)
     Whole.setFlag(SpriteFlag.DestroyOnWall, true)
 }
 let Whole: Sprite = null
@@ -298,7 +325,6 @@ let mySprite: Sprite = null
 let mySprite2: Sprite = null
 let Quarter: Sprite = null
 let mySprite3: Sprite = null
-let Half = 0
 let GameState = 0
 Load_Intro_Sequence()
 Load_School_View()
