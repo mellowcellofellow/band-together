@@ -94,6 +94,7 @@ function DrumLevel1 () {
     if (info.score() > 9000) {
         music.play(music.stringPlayable("C E G C5 - B C5 - ", 120), music.PlaybackMode.InBackground)
         game.splash("That was pretty good! I'll join your band!")
+        info.changeLifeBy(1)
     } else {
         game.splash("You'll have to do better than that to get me in your band!")
     }
@@ -326,6 +327,7 @@ let mySprite2: Sprite = null
 let Quarter: Sprite = null
 let mySprite3: Sprite = null
 let GameState = 0
+info.setLife(1)
 Load_Intro_Sequence()
 Load_School_View()
 forever(function () {
