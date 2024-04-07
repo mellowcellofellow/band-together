@@ -40,9 +40,11 @@ function BassLevel1 () {
     GameState = 0
     if (info.score() > 1500) {
         music.play(music.stringPlayable("C E G C5 - B C5 - ", 120), music.PlaybackMode.InBackground)
+        game.setDialogTextColor(2)
         game.splash("That was pretty good! I'll join your band!")
         info.changeLifeBy(1)
     } else {
+        game.setDialogTextColor(2)
         game.splash("You'll have to do better than that to get me in your band!")
     }
     sprites.destroyAllSpritesOfKind(SpriteKind.Player)
@@ -50,6 +52,7 @@ function BassLevel1 () {
     info.setScore(0)
 }
 function Bass_Room_Conversation () {
+    pause(2000)
     game.setDialogTextColor(15)
     game.showLongText("Hey! Are you a bass player?", DialogLayout.Bottom)
     game.setDialogTextColor(2)
@@ -115,9 +118,11 @@ function DrumLevel1 () {
     GameState = 0
     if (info.score() > 9000) {
         music.play(music.stringPlayable("C E G C5 - B C5 - ", 120), music.PlaybackMode.InBackground)
+        game.setDialogTextColor(7)
         game.splash("That was pretty good! I'll join your band!")
         info.changeLifeBy(1)
     } else {
+        game.setDialogTextColor(7)
         game.splash("You'll have to do better than that to get me in your band!")
     }
     sprites.destroyAllSpritesOfKind(SpriteKind.Player)
@@ -142,6 +147,8 @@ function BassClass () {
     scene.centerCameraAt(0, 0)
     mySprite2 = sprites.create(assets.image`Point`, SpriteKind.Press)
     mySprite = sprites.create(assets.image`Player`, SpriteKind.Player)
+    mySprite5 = sprites.create(assets.image`BassPlayer`, SpriteKind.Player)
+    mySprite5.setPosition(29, 84)
     mySprite.setPosition(9, 108)
     mySprite2.setPosition(21, 112)
     controller.moveSprite(mySprite, 0, 0)
@@ -155,6 +162,7 @@ function BassClass () {
     }
 }
 function Drum_Room_Conversation () {
+    pause(2000)
     game.setDialogTextColor(15)
     game.showLongText("Hey! Are you a drummer?", DialogLayout.Bottom)
     game.setDialogTextColor(7)
@@ -300,6 +308,7 @@ function Load_School_View () {
     tiles.placeOnTile(student2, tiles.getTileLocation(10, 15))
     tiles.placeOnTile(student3, tiles.getTileLocation(11, 16))
     tiles.placeOnTile(poster, tiles.getTileLocation(17, 10))
+    game.setDialogTextColor(15)
     game.showLongText("Use up/down/left/right to explore your new school.", DialogLayout.Full)
 }
 function PairofEighths () {
@@ -350,6 +359,7 @@ let poster: Sprite = null
 let student3: Sprite = null
 let student2: Sprite = null
 let student1: Sprite = null
+let mySprite5: Sprite = null
 let mySprite: Sprite = null
 let mySprite2: Sprite = null
 let Quarter: Sprite = null
@@ -366,16 +376,31 @@ forever(function () {
         BassClass()
     }
     if (mySprite.tileKindAt(TileDirection.Top, assets.tile`myTile2`)) {
-        game.showLongText("I bet he doesn't even play in a band.", DialogLayout.Bottom)
-        tiles.placeOnTile(mySprite, tiles.getTileLocation(9, 18))
+        if (info.life() >= 2) {
+            game.showLongText("I hear he's already putting a band together. Maybe he is ok.", DialogLayout.Bottom)
+            tiles.placeOnTile(mySprite, tiles.getTileLocation(9, 18))
+        } else {
+            game.showLongText("I bet he doesn't even play in a band.", DialogLayout.Bottom)
+            tiles.placeOnTile(mySprite, tiles.getTileLocation(9, 18))
+        }
     }
     if (mySprite.tileKindAt(TileDirection.Top, assets.tile`myTile3`)) {
-        game.showLongText("What a dork.", DialogLayout.Bottom)
-        tiles.placeOnTile(mySprite, tiles.getTileLocation(10, 18))
+        if (info.life() >= 2) {
+            game.showLongText("He might be cool....", DialogLayout.Bottom)
+            tiles.placeOnTile(mySprite, tiles.getTileLocation(9, 18))
+        } else {
+            game.showLongText("What a dork.", DialogLayout.Bottom)
+            tiles.placeOnTile(mySprite, tiles.getTileLocation(10, 18))
+        }
     }
     if (mySprite.tileKindAt(TileDirection.Top, assets.tile`myTile4`)) {
-        game.showLongText("Oh look, it's the new kid.", DialogLayout.Bottom)
-        tiles.placeOnTile(mySprite, tiles.getTileLocation(11, 18))
+        if (info.life() >= 2) {
+            game.showLongText("The new kid has been talking to some players....", DialogLayout.Bottom)
+            tiles.placeOnTile(mySprite, tiles.getTileLocation(9, 18))
+        } else {
+            game.showLongText("Oh look, it's the new kid.", DialogLayout.Bottom)
+            tiles.placeOnTile(mySprite, tiles.getTileLocation(11, 18))
+        }
     }
     if (mySprite.tileKindAt(TileDirection.Top, assets.tile`myTile6`)) {
         game.showLongText("Hey, there's a battle of the bands on Friday!", DialogLayout.Bottom)
