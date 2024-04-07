@@ -365,6 +365,8 @@ let mySprite2: Sprite = null
 let Quarter: Sprite = null
 let mySprite3: Sprite = null
 let GameState = 0
+scene.setBackgroundImage(assets.image`Band Together`)
+pause(2000)
 info.setLife(1)
 Load_Intro_Sequence()
 Load_School_View()
