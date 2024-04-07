@@ -36,6 +36,28 @@ function BassLevel1 () {
         QuarterNote()
     }
     WholeNote()
+    pause(5000)
+    GameState = 0
+    if (info.score() > 1500) {
+        music.play(music.stringPlayable("C E G C5 - B C5 - ", 120), music.PlaybackMode.InBackground)
+        game.splash("That was pretty good! I'll join your band!")
+        info.changeLifeBy(1)
+    } else {
+        game.splash("You'll have to do better than that to get me in your band!")
+    }
+    sprites.destroyAllSpritesOfKind(SpriteKind.Player)
+    Load_School_View()
+    info.setScore(0)
+}
+function Bass_Room_Conversation () {
+    game.setDialogTextColor(15)
+    game.showLongText("Hey! Are you a bass player?", DialogLayout.Bottom)
+    game.setDialogTextColor(2)
+    game.showLongText("I can slap.", DialogLayout.Bottom)
+    game.setDialogTextColor(15)
+    game.showLongText("I'm looking for a bass player to join my Band!", DialogLayout.Bottom)
+    game.setDialogTextColor(2)
+    game.showLongText("I might be interested. Show me what you've got!", DialogLayout.Bottom)
 }
 function HalfNote () {
     mySprite3 = sprites.create(assets.image`HalfNotePic`, SpriteKind.Projectile)
@@ -47,7 +69,7 @@ function HalfNote () {
 function DrumLevel1 () {
     GameState = 1
     music.play(music.createSong(assets.song`Drum Level 1`), music.PlaybackMode.InBackground)
-    pause(1550)
+    pause(1480)
     PairofEighths()
     QuarterNote()
     PairofEighths()
@@ -123,18 +145,24 @@ function BassClass () {
     mySprite.setPosition(9, 108)
     mySprite2.setPosition(21, 112)
     controller.moveSprite(mySprite, 0, 0)
-    game.splash("Get Ready!")
-    BassLevel1()
+    Bass_Room_Conversation()
+    if (game.ask("Are you ready?")) {
+        game.splash("Get Ready!")
+        BassLevel1()
+    } else {
+        sprites.destroyAllSpritesOfKind(SpriteKind.Player)
+        Load_School_View()
+    }
 }
 function Drum_Room_Conversation () {
     game.setDialogTextColor(15)
-    game.splash("Hey! Are you a drummer?")
+    game.showLongText("Hey! Are you a drummer?", DialogLayout.Bottom)
     game.setDialogTextColor(7)
-    game.splash("I've been known to drum.")
+    game.showLongText("I've been known to drum.", DialogLayout.Bottom)
     game.setDialogTextColor(15)
-    game.splash("I'm looking for a drummer to join my Band!")
+    game.showLongText("I'm looking for a drummer to join my Band!", DialogLayout.Bottom)
     game.setDialogTextColor(7)
-    game.splash("Well, I don't just join any band. You'll have to prove yourself first.")
+    game.showLongText("Well, I don't just join any band. You'll have to prove yourself first.", DialogLayout.Bottom)
 }
 function Load_School_View () {
     scene.setBackgroundImage(img`
@@ -299,7 +327,7 @@ function DrumClass () {
     controller.moveSprite(mySprite, 0, 0)
     Drum_Room_Conversation()
     game.setDialogTextColor(7)
-    if (game.ask("Are you ready to prove yourself?")) {
+    if (game.ask("Are you ready?")) {
         game.splash("Get Ready!")
         DrumLevel1()
     } else {
