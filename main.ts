@@ -54,13 +54,13 @@ function BassLevel1 () {
 function Bass_Room_Conversation () {
     pause(2000)
     game.setDialogTextColor(15)
-    game.showLongText("Hey! Are you a bass player?", DialogLayout.Bottom)
+    game.showLongText("Hey! Are you a bass player?", DialogLayout.Top)
     game.setDialogTextColor(2)
-    game.showLongText("I can slap.", DialogLayout.Bottom)
+    game.showLongText("I can slap.", DialogLayout.Top)
     game.setDialogTextColor(15)
-    game.showLongText("I'm looking for a bass player to join my Band!", DialogLayout.Bottom)
+    game.showLongText("I'm looking for a bass player to join my Band!", DialogLayout.Top)
     game.setDialogTextColor(2)
-    game.showLongText("I might be interested. Show me what you've got!", DialogLayout.Bottom)
+    game.showLongText("I might be interested. Show me what you've got!", DialogLayout.Top)
 }
 function HalfNote () {
     mySprite3 = sprites.create(assets.image`HalfNotePic`, SpriteKind.Projectile)
@@ -164,13 +164,13 @@ function BassClass () {
 function Drum_Room_Conversation () {
     pause(2000)
     game.setDialogTextColor(15)
-    game.showLongText("Hey! Are you a drummer?", DialogLayout.Bottom)
+    game.showLongText("Hey! Are you a drummer?", DialogLayout.Top)
     game.setDialogTextColor(7)
-    game.showLongText("I've been known to drum.", DialogLayout.Bottom)
+    game.showLongText("I've been known to drum.", DialogLayout.Top)
     game.setDialogTextColor(15)
-    game.showLongText("I'm looking for a drummer to join my Band!", DialogLayout.Bottom)
+    game.showLongText("I'm looking for a drummer to join my Band!", DialogLayout.Top)
     game.setDialogTextColor(7)
-    game.showLongText("Well, I don't just join any band. You'll have to prove yourself first.", DialogLayout.Bottom)
+    game.showLongText("Well, I don't just join any band. You'll have to prove yourself first.", DialogLayout.Top)
 }
 function Load_School_View () {
     scene.setBackgroundImage(img`
