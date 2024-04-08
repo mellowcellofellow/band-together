@@ -377,6 +377,7 @@ let GameState = 0
 scene.setBackgroundImage(assets.image`Band Together`)
 pause(2000)
 info.setLife(1)
+let meangirls = 0
 Load_Intro_Sequence()
 Load_School_View()
 forever(function () {
@@ -392,7 +393,8 @@ forever(function () {
             tiles.placeOnTile(mySprite, tiles.getTileLocation(9, 12))
         } else {
             game.showLongText("I bet he doesn't even play in a band.", DialogLayout.Bottom)
-            tiles.placeOnTile(mySprite, tiles.getTileLocation(9, 12))
+            meangirls += 1
+            tiles.placeOnTile(mySprite, tiles.getTileLocation(9, 18))
         }
     }
     if (mySprite.tileKindAt(TileDirection.Top, assets.tile`myTile3`)) {
@@ -401,7 +403,8 @@ forever(function () {
             tiles.placeOnTile(mySprite, tiles.getTileLocation(10, 12))
         } else {
             game.showLongText("What a dork.", DialogLayout.Bottom)
-            tiles.placeOnTile(mySprite, tiles.getTileLocation(10, 12))
+            meangirls += 1
+            tiles.placeOnTile(mySprite, tiles.getTileLocation(10, 18))
         }
     }
     if (mySprite.tileKindAt(TileDirection.Top, assets.tile`myTile4`)) {
@@ -410,7 +413,8 @@ forever(function () {
             tiles.placeOnTile(mySprite, tiles.getTileLocation(11, 12))
         } else {
             game.showLongText("Oh look, it's the new kid.", DialogLayout.Bottom)
-            tiles.placeOnTile(mySprite, tiles.getTileLocation(11, 12))
+            tiles.placeOnTile(mySprite, tiles.getTileLocation(11, 18))
+            meangirls += 1
         }
     }
     if (mySprite.tileKindAt(TileDirection.Top, assets.tile`myTile6`)) {
@@ -418,5 +422,11 @@ forever(function () {
         game.showLongText("If I win that then everybody will think I'm cool.", DialogLayout.Bottom)
         game.showLongText("But I need a band... I better find some other musicians.", DialogLayout.Bottom)
         tiles.placeOnTile(mySprite, tiles.getTileLocation(17, 12))
+    }
+    if (meangirls == 3) {
+        tiles.placeOnTile(mySprite, tiles.getTileLocation(11, 20))
+        game.showLongText("\"Fitting in is harder than I thought it would be..\"", DialogLayout.Bottom)
+        game.showLongText("\"There has to be something I can do to seem cool..\"", DialogLayout.Bottom)
+        meangirls += 1
     }
 })
