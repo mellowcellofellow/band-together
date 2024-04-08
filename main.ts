@@ -295,21 +295,30 @@ function Load_School_View () {
         ................................................................................................................................................................
         ................................................................................................................................................................
         `)
-    tiles.setCurrentTilemap(tilemap`School View Tilemap`)
-    student1 = sprites.create(assets.image`princess2Right1`, SpriteKind.Enemy)
-    student2 = sprites.create(assets.image`princessFront0`, SpriteKind.Enemy)
-    student3 = sprites.create(assets.image`villager1WalkLeft1`, SpriteKind.Enemy)
+    if (info.life() >= 2) {
+        tiles.setCurrentTilemap(tilemap`School View Tilemap2`)
+        student1 = sprites.create(assets.image`princess2Right1`, SpriteKind.Enemy)
+        tiles.placeOnTile(student1, tiles.getTileLocation(9, 10))
+        student2 = sprites.create(assets.image`princessFront0`, SpriteKind.Enemy)
+        tiles.placeOnTile(student2, tiles.getTileLocation(10, 9))
+        student3 = sprites.create(assets.image`villager1WalkLeft1`, SpriteKind.Enemy)
+        tiles.placeOnTile(student3, tiles.getTileLocation(11, 10))
+    } else {
+        tiles.setCurrentTilemap(tilemap`School View Tilemap`)
+        student1 = sprites.create(assets.image`princess2Right1`, SpriteKind.Enemy)
+        tiles.placeOnTile(student1, tiles.getTileLocation(9, 16))
+        student2 = sprites.create(assets.image`princessFront0`, SpriteKind.Enemy)
+        tiles.placeOnTile(student2, tiles.getTileLocation(10, 15))
+        student3 = sprites.create(assets.image`villager1WalkLeft1`, SpriteKind.Enemy)
+        tiles.placeOnTile(student3, tiles.getTileLocation(11, 16))
+    }
     mySprite = sprites.create(assets.image`Player`, SpriteKind.Player)
     poster = sprites.create(assets.image`smallBlue0`, SpriteKind.Player)
     controller.moveSprite(mySprite)
-    scene.cameraFollowSprite(mySprite)
-    tiles.placeOnTile(mySprite, tiles.getTileLocation(11, 23))
-    tiles.placeOnTile(student1, tiles.getTileLocation(9, 16))
-    tiles.placeOnTile(student2, tiles.getTileLocation(10, 15))
-    tiles.placeOnTile(student3, tiles.getTileLocation(11, 16))
     tiles.placeOnTile(poster, tiles.getTileLocation(17, 10))
-    game.setDialogTextColor(15)
-    game.showLongText("Use up/down/left/right to explore your new school.", DialogLayout.Full)
+    tiles.placeOnTile(mySprite, tiles.getTileLocation(11, 23))
+    game.showLongText("Use the up/down/left/right keys to explore your new school.", DialogLayout.Full)
+    scene.cameraFollowSprite(mySprite)
 }
 function PairofEighths () {
     firsteighth = sprites.create(assets.image`First EighthPic`, SpriteKind.Projectile)
@@ -380,28 +389,28 @@ forever(function () {
     if (mySprite.tileKindAt(TileDirection.Top, assets.tile`myTile2`)) {
         if (info.life() >= 2) {
             game.showLongText("I hear he's already putting a band together. Maybe he is ok.", DialogLayout.Bottom)
-            tiles.placeOnTile(mySprite, tiles.getTileLocation(9, 18))
+            tiles.placeOnTile(mySprite, tiles.getTileLocation(9, 12))
         } else {
             game.showLongText("I bet he doesn't even play in a band.", DialogLayout.Bottom)
-            tiles.placeOnTile(mySprite, tiles.getTileLocation(9, 18))
+            tiles.placeOnTile(mySprite, tiles.getTileLocation(9, 12))
         }
     }
     if (mySprite.tileKindAt(TileDirection.Top, assets.tile`myTile3`)) {
         if (info.life() >= 2) {
             game.showLongText("He might be cool....", DialogLayout.Bottom)
-            tiles.placeOnTile(mySprite, tiles.getTileLocation(9, 18))
+            tiles.placeOnTile(mySprite, tiles.getTileLocation(10, 12))
         } else {
             game.showLongText("What a dork.", DialogLayout.Bottom)
-            tiles.placeOnTile(mySprite, tiles.getTileLocation(10, 18))
+            tiles.placeOnTile(mySprite, tiles.getTileLocation(10, 12))
         }
     }
     if (mySprite.tileKindAt(TileDirection.Top, assets.tile`myTile4`)) {
         if (info.life() >= 2) {
             game.showLongText("The new kid has been talking to some players....", DialogLayout.Bottom)
-            tiles.placeOnTile(mySprite, tiles.getTileLocation(9, 18))
+            tiles.placeOnTile(mySprite, tiles.getTileLocation(11, 12))
         } else {
             game.showLongText("Oh look, it's the new kid.", DialogLayout.Bottom)
-            tiles.placeOnTile(mySprite, tiles.getTileLocation(11, 18))
+            tiles.placeOnTile(mySprite, tiles.getTileLocation(11, 12))
         }
     }
     if (mySprite.tileKindAt(TileDirection.Top, assets.tile`myTile6`)) {
