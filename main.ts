@@ -138,12 +138,12 @@ function QuarterNote () {
 }
 function Load_Intro_Sequence () {
     scene.setBackgroundImage(assets.image`School Front`)
-    game.showLongText("Hey PLAYER! Starting at a new School can be tough. How are you going to fit in?", DialogLayout.Bottom)
+    game.showLongText("Hey PLAYER! Starting at a new school can be tough. How are you going to fit in?", DialogLayout.Bottom)
     game.showLongText("Press A to enter your new school.", DialogLayout.Bottom)
 }
 controller.A.onEvent(ControllerButtonEvent.Repeated, function () {
     if (GameState == 1) {
-        info.changeScoreBy(-10)
+        info.changeScoreBy(-20)
     }
 })
 function BassClass () {
@@ -178,6 +178,7 @@ function Drum_Room_Conversation () {
     game.showLongText("Well, I don't just join any band. You'll have to prove yourself first.", DialogLayout.Top)
 }
 function Load_School_View () {
+    sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
     scene.setBackgroundImage(img`
         ................................................................................................................................................................
         ................................................................................................................................................................
