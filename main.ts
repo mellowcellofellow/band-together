@@ -38,7 +38,7 @@ function BassLevel1 () {
     WholeNote()
     pause(5000)
     GameState = 0
-    if (info.score() > 1500) {
+    if (info.score() > 100) {
         music.play(music.stringPlayable("C E G C5 - B C5 - ", 120), music.PlaybackMode.InBackground)
         game.setDialogTextColor(2)
         game.splash("That was pretty good! I'll join your band!")
@@ -141,6 +141,11 @@ function Load_Intro_Sequence () {
     game.showLongText("Hey PLAYER! Starting at a new School can be tough. How are you going to fit in?", DialogLayout.Bottom)
     game.showLongText("Press A to enter your new school.", DialogLayout.Bottom)
 }
+controller.A.onEvent(ControllerButtonEvent.Repeated, function () {
+    if (GameState == 1) {
+        info.changeScoreBy(-10)
+    }
+})
 function BassClass () {
     tiles.setCurrentTilemap(tilemap`level3`)
     scene.setBackgroundImage(assets.image`Bass Room`)
